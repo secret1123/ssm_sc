@@ -38,6 +38,11 @@ public abstract class GenericServiceImpl<T extends Serializable,ID extends Numbe
     }
 
     @Override
+    public void modify(String statement,Object parameter){
+        genericDao.modify(statement, parameter);
+    }
+
+    @Override
     public T query(String statement, Object parameter) {
         return genericDao.query(statement,parameter);
     }

@@ -5,7 +5,7 @@
 
 <mapper namespace="course">
     <insert id="create" parameterType="course" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO db_ssm.course (
+        INSERT INTO db_sc.course (
     title, 
     credit
         )
@@ -15,11 +15,11 @@
         );
     </insert>
     <delete id="remove">
-        DELETE FROM db_ssm.course
+        DELETE FROM db_sc.course
         WHERE course.id = #{id}
     </delete>
     <update id="modify">
-        UPDATE db_ssm.course
+        UPDATE db_sc.course
         SET
     title = #{title}, 
     credit = #{credit}
@@ -27,12 +27,30 @@
     </update>
     <select id="queryAll" resultType="course">
         SELECT *
-        FROM db_ssm.course
+        FROM db_sc.course
         ORDER BY id
     </select>
     <select id="queryById" resultType="course">
         SELECT *
-        FROM db_ssm.course
+        FROM db_sc.course
         WHERE course.id = #{id}
+    </select>
+
+    <resultMap id="queryStudentsByCourseId_map" type="course">
+        <result property="title" column="title"/>
+        <collection property="students" ofType="student">
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
+    <select id="queryStudentsByCourseId" parameterType="int" resultMap="queryStudentsByCourseId_map">
+        SELECT
+         c.title,
+         s.name
+        FROM db_sc.course c
+        LEFT OUTER JOIN db_sc.student_course sc
+        ON c.id = sc.courseId
+        LEFT OUTER JOIN db_sc.student s
+        ON s.id = sc.studentId
+        WHERE c.id = ${id};
     </select>
 </mapper>

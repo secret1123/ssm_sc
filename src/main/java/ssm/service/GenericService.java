@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by AnLu on
  * 2017/7/23 22:07.
- * ssm
+ * ssm_sc
  */
 public interface GenericService<T extends Serializable, ID extends Number> {
 

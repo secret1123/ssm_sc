@@ -5,7 +5,7 @@
 
 <mapper namespace="studentCourse">
     <insert id="create" parameterType="studentcourse" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO db_ssm.student_course (
+        INSERT INTO db_sc.student_course (
     studentId, 
     courseId
         )
@@ -15,11 +15,11 @@
         );
     </insert>
     <delete id="remove">
-        DELETE FROM db_ssm.student_course
+        DELETE FROM db_sc.student_course
         WHERE student_course.id = #{id}
     </delete>
     <update id="modify">
-        UPDATE db_ssm.student_course
+        UPDATE db_sc.student_course
         SET
     studentId = #{studentId}, 
     courseId = #{courseId}
@@ -27,12 +27,12 @@
     </update>
     <select id="queryAll" resultType="studentcourse">
         SELECT *
-        FROM db_ssm.student_course
+        FROM db_sc.student_course
         ORDER BY id
     </select>
     <select id="queryById" resultType="studentcourse">
         SELECT *
-        FROM db_ssm.student_course
+        FROM db_sc.student_course
         WHERE student_course.id = #{id}
     </select>
 </mapper>

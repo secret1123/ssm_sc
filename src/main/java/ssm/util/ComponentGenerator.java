@@ -16,13 +16,13 @@ import java.util.Scanner;
 /**
  * Created by AnLu on
  * 2017/7/23 22:15.
- * ssm
+ * ssm_sc
  */
 class ComponentGenerator {
 
     // Configuration
     private static final String PACKAGE = "ssm";
-    private static final String DATABASE = "db_ssm";
+    private static final String DATABASE = "db_sc";
 
     private static final String CODE_PATH = "src/main/java/";
     private static final String PAGE_PATH = "src/main/webapp/";

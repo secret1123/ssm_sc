@@ -5,7 +5,7 @@
 
 <mapper namespace="student">
     <insert id="create" parameterType="student" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO db_ssm.student (
+        INSERT INTO db_sc.student (
     name, 
     gender
         )
@@ -15,11 +15,11 @@
         );
     </insert>
     <delete id="remove">
-        DELETE FROM db_ssm.student
+        DELETE FROM db_sc.student
         WHERE student.id = #{id}
     </delete>
     <update id="modify">
-        UPDATE db_ssm.student
+        UPDATE db_sc.student
         SET
     name = #{name}, 
     gender = #{gender}
@@ -27,12 +27,30 @@
     </update>
     <select id="queryAll" resultType="student">
         SELECT *
-        FROM db_ssm.student
+        FROM db_sc.student
         ORDER BY id
     </select>
     <select id="queryById" resultType="student">
         SELECT *
-        FROM db_ssm.student
+        FROM db_sc.student
         WHERE student.id = #{id}
+    </select>
+
+    <resultMap id="queryCoursesByStudentId_map" type="student">
+        <result property="name" column="name"/>
+        <collection property="courses" ofType="course">
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+    <select id="queryCoursesByStudentId" parameterType="int" resultMap="queryCoursesByStudentId_map">
+        SELECT
+         s.name,
+         c.title
+        FROM db_sc.student s
+        LEFT OUTER JOIN db_sc.student_course sc
+        ON s.id = sc.studentId
+        LEFT OUTER JOIN db_sc.course c
+        ON c.id = sc.courseId
+        WHERE s.id = ${id};
     </select>
 </mapper>

@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by AnLu on
  * 2017/7/23 22:08.
- * ssm
+ * ssm_sc
  */
 public abstract class GenericServiceImpl<T extends Serializable,ID extends Number> implements GenericService<T,ID> {
 
